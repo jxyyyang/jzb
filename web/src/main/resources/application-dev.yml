@@ -1,0 +1,59 @@
+server:
+  port: 5050
+  error:
+    path: /404
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      url: jdbc:mysql://127.0.0.1:3306/jzb?serverTimezone=UTC&characterEncoding=utf8&useUnicode=true&useSSL=false&allowMultiQueries=true&useAffectedRows=true
+      driver-class-name: com.mysql.jdbc.Driver
+      username: root
+      password: root
+      initial-size: 10
+      max-active: 10
+      min-idle: 5
+      max-wait: 6000
+      min-evictable-idle-time-millis: 300000
+      time-between-eviction-runs-millis: 60000
+      validation-query: select 'x'
+      test-on-borrow: false
+      test-on-return: false
+      test-while-idle: true
+      pool-prepared-statements: true
+      max-pool-prepared-statement-per-connection-size: 50
+      stat-view-servlet:
+        login-username: ywkj
+        login-password: ywkj
+  thymeleaf:
+    cache: false
+    prefix: classpath:/templates/
+    suffix: .html
+    encoding: UTF-8
+    mode: HTML5
+  resources:
+    static-locations: classpath:/static/
+  mvc:
+    static-path-pattern: /static/**
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 20MB
+  cache:
+    type: ehcache
+    ehcache:
+      config: classpath:/ehcache.xml
+mybatis:
+  type-aliases-package: com.yang.jzb.model
+  mapper-locations: /mapper/**/*Mapper.xml
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+file:
+  path: F:/文件
+  # 加载路径
+  load-Path: file:/${file.path}/
+  # 上传路径
+  upload-Path: ${file.path}/
+  # 预览图
+  preview-path: ${file.path}/preview/
